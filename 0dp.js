@@ -49,6 +49,11 @@ function renderMusicas(containerId = 'lista-de-musicas', options = {}){
 		cover.className = 'musica-card__cover';
 		const img = document.createElement('img');
 		img.src = m.capaUrl || '';
+		// fallback to a placeholder if image fails to load
+		img.onerror = function(){
+			this.onerror = null;
+			this.src = 'https://via.placeholder.com/72x72?text=No+Image';
+		};
 		img.alt = `Capa da música ${m.titulo}`;
 		cover.appendChild(img);
 

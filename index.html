@@ -7,7 +7,7 @@
     <meta name="author" content="christophernic" />
     <title>Meu Site — Estrutura Base</title>
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="0dp.css">
+  <link rel="stylesheet" href="/0dp.css">
     <style>
       :root{--bg:#fff;--fg:#111;--muted:#666}
       html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
@@ -58,6 +58,13 @@
       <small>&copy; 2025 Meu Site — Todos os direitos reservados.</small>
     </footer>
 
-    <script src="0dp.js" defer></script>
+    <script src="/0dp.js" defer></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        if (typeof window.renderMusicas === 'function') {
+          try { window.renderMusicas(); } catch (e) { console.error(e); }
+        }
+      });
+    </script>
   </body>
 </html>
