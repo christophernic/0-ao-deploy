@@ -1,8 +1,7 @@
 {
   "version": 2,
-  "name": "0-ao-deploy",
   "builds": [
-    { "src": "index.html", "use": "@vercel/static" }
+    { "src": "**", "use": "@vercel/static" }
   ],
   "routes": []
 }
