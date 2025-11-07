@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Estrutura base de um site HTML5." />
+    <meta name="author" content="christophernic" />
+    <title>Meu Site — Estrutura Base</title>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="0dp.css">
+    <style>
+      :root{--bg:#fff;--fg:#111;--muted:#666}
+      html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+      body{background:var(--bg);color:var(--fg);line-height:1.5}
+      header{padding:1rem 1.25rem;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between}
+      nav a{margin-left:0.75rem;color:var(--muted);text-decoration:none}
+      main{max-width:980px;margin:2rem auto;padding:0 1.25rem}
+      footer{padding:1rem 1.25rem;border-top:1px solid #eee;text-align:center;color:var(--muted);font-size:0.95rem}
+      .hero{padding:2rem;background:linear-gradient(180deg, #f9f9fb, #fff);border-radius:8px}
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <a href="/" aria-label="Ir para a página inicial"><strong>Meu Site</strong></a>
+      </div>
+      <nav aria-label="Navegação principal">
+        <a href="#">Início</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" role="region" aria-labelledby="hero-title">
+        <h1 id="hero-title">Bem-vindo ao meu site</h1>
+        <p>Esta é a estrutura base de um site HTML5 — personalize conforme necessário.</p>
+      </section>
+
+      <section id="sobre" aria-labelledby="sobre-title">
+        <h2 id="sobre-title">Sobre</h2>
+        <p>Coloque aqui uma breve descrição do projeto ou do autor.</p>
+      </section>
+
+      <section id="contato" aria-labelledby="contato-title">
+        <h2 id="contato-title">Contato</h2>
+        <p>Formas de contato e links para redes sociais.</p>
+      </section>
+    </main>
+
+    <footer>
+      <small>&copy; 2025 Meu Site — Todos os direitos reservados.</small>
+    </footer>
+
+    <script src="0dp.js" defer></script>
+  </body>
+</html>
