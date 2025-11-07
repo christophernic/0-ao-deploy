@@ -48,11 +48,16 @@ function renderMusicas(containerId = 'lista-de-musicas', options = {}){
 		const cover = document.createElement('div');
 		cover.className = 'musica-card__cover';
 		const img = document.createElement('img');
-		img.src = m.capaUrl || '';
-		// fallback to a placeholder if image fails to load
+		// if capaUrl exists use it, else generate a colorful SVG cover data URL
+		if (m.capaUrl) {
+			img.src = m.capaUrl;
+		} else {
+			img.src = generateCoverSVGDataURL(m.titulo, m.artista);
+		}
+		// fallback to generated SVG if external image fails
 		img.onerror = function(){
 			this.onerror = null;
-			this.src = 'https://via.placeholder.com/72x72?text=No+Image';
+			this.src = generateCoverSVGDataURL(m.titulo, m.artista);
 		};
 		img.alt = `Capa da música ${m.titulo}`;
 		cover.appendChild(img);
@@ -111,6 +116,34 @@ function renderMusicas(containerId = 'lista-de-musicas', options = {}){
 
 	return container;
 }
+
+/** Generate a colorful SVG data URL for a cover using title/artist as seed */
+function generateCoverSVGDataURL(title = '', artist = ''){
+	// simple deterministic color generation from string
+	function hashStr(s){
+		let h = 2166136261;
+		for (let i=0;i<s.length;i++) h = Math.imul(h ^ s.charCodeAt(i), 16777619) >>> 0;
+		return h;
+	}
+	const h1 = hashStr(title || artist || 'cover');
+	const h2 = hashStr((artist||'') + (title||''));
+	const color1 = `hsl(${h1 % 360}deg 70% 40%)`.replace('deg','');
+	const color2 = `hsl(${h2 % 360}deg 65% 55%)`.replace('deg','');
+	const initials = (title || '').split(' ').slice(0,2).map(p=>p[0]||'').join('').toUpperCase() || (artist||'').slice(0,2).toUpperCase();
+	const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'>
+		<defs>
+			<linearGradient id='g' x1='0' x2='1' y1='0' y2='1'>
+				<stop offset='0' stop-color='${color1}'/>
+				<stop offset='1' stop-color='${color2}'/>
+			</linearGradient>
+		</defs>
+		<rect width='100%' height='100%' fill='url(#g)' rx='8' ry='8'/>
+		<text x='50%' y='54%' font-family='Poppins,Helvetica,Arial' font-weight='600' font-size='36' fill='rgba(255,255,255,0.92)' text-anchor='middle' dominant-baseline='middle'>${escapeXml(initials)}</text>
+	</svg>`;
+	return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+}
+
+function escapeXml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 
 // Expor globalmente
 if (typeof window !== 'undefined') window.renderMusicas = renderMusicas;
