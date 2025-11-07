@@ -20,49 +20,58 @@
     </style>
   </head>
   <body>
-    <header>
-      <div class="brand">
-        <a href="/" aria-label="Ir para a página inicial"><strong>Meu Site</strong></a>
+    <div class="app-root">
+      <aside class="sidebar" aria-label="Navegação lateral">
+        <div class="sidebar-top">
+          <div class="logo">Meu Site</div>
+        </div>
+        <nav class="sidebar-nav">
+          <a class="nav-item active" href="#">Início</a>
+          <a class="nav-item" href="#">Buscar</a>
+          <a class="nav-item" href="#">Sua Biblioteca</a>
+        </nav>
+        <div class="sidebar-playlists">
+          <h4>Playlists</h4>
+          <a class="playlist-item" href="#">Top 50</a>
+          <a class="playlist-item" href="#">Favoritas</a>
+          <a class="playlist-item" href="#">Descobertas</a>
+        </div>
+      </aside>
+
+      <div class="main-area">
+        <header class="topbar">
+          <div class="search">
+            <input type="search" placeholder="Buscar músicas, artistas ou álbuns" aria-label="Buscar" />
+          </div>
+          <div class="user">
+            <span class="user-name">christophernic</span>
+          </div>
+        </header>
+
+        <section class="playlist-hero">
+          <div class="playlist-cover"></div>
+          <div class="playlist-info">
+            <h2>Minha Playlist</h2>
+            <p>Uma seleção curada para testar o layout estilo Spotify.</p>
+          </div>
+        </section>
+
+        <section id="musicas" class="content-section" aria-labelledby="musicas-title">
+          <h3 id="musicas-title">Músicas</h3>
+          <div id="lista-de-musicas" class="lista-de-musicas" aria-live="polite"></div>
+        </section>
+
+        <footer class="site-footer">
+          <small>&copy; 2025 Meu Site — Todos os direitos reservados.</small>
+        </footer>
       </div>
-      <nav aria-label="Navegação principal">
-        <a href="#">Início</a>
-        <a href="#sobre">Sobre</a>
-        <a href="#contato">Contato</a>
-      </nav>
-    </header>
-
-    <main>
-      <section class="hero" role="region" aria-labelledby="hero-title">
-        <h1 id="hero-title">Bem-vindo ao meu site</h1>
-        <p>Esta é a estrutura base de um site HTML5 — personalize conforme necessário.</p>
-      </section>
-
-      <!-- Lista de músicas (renderizada por 0dp.js) -->
-      <section id="musicas" aria-labelledby="musicas-title">
-        <h2 id="musicas-title">Músicas</h2>
-        <div id="lista-de-musicas" class="lista-de-musicas" aria-live="polite"></div>
-      </section>
-
-      <section id="sobre" aria-labelledby="sobre-title">
-        <h2 id="sobre-title">Sobre</h2>
-        <p>Coloque aqui uma breve descrição do projeto ou do autor.</p>
-      </section>
-
-      <section id="contato" aria-labelledby="contato-title">
-        <h2 id="contato-title">Contato</h2>
-        <p>Formas de contato e links para redes sociais.</p>
-      </section>
-    </main>
-
-    <footer>
-      <small>&copy; 2025 Meu Site — Todos os direitos reservados.</small>
-    </footer>
+    </div>
 
     <script src="/0dp.js" defer></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        if (typeof window.renderMusicas === 'function') {
-          try { window.renderMusicas(); } catch (e) { console.error(e); }
+        if (typeof window.initUI === 'function') {
+          try { window.initUI(); } catch (e) { console.error(e); }
         }
       });
     </script>

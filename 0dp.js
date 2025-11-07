@@ -118,3 +118,35 @@ try{
 	if (typeof module !== 'undefined' && module.exports) module.exports.renderMusicas = renderMusicas;
 }catch(e){}
 
+/** Render sidebar (static links) */
+function renderSidebar(){
+	// nothing dynamic for now; placeholder in case we want to list user's playlists
+	return true;
+}
+
+/** Render topbar (search behavior) */
+function renderTopbar(){
+	const input = document.querySelector('.topbar .search input');
+	if (!input) return;
+	input.addEventListener('input', (e)=>{
+		const q = e.target.value.toLowerCase().trim();
+		// simple filter by title or artist
+		const cards = document.querySelectorAll('.musica-card');
+		cards.forEach(c=>{
+			const title = c.querySelector('.musica-card__title').textContent.toLowerCase();
+			const artist = c.querySelector('.musica-card__artist').textContent.toLowerCase();
+			if (!q || title.includes(q) || artist.includes(q)) c.style.display = '';
+			else c.style.display = 'none';
+		});
+	});
+}
+
+/** Initialize the UI: render sidebar, topbar and music list */
+function initUI(){
+	try{ renderSidebar(); }catch(e){/* ignore */}
+	try{ renderMusicas(); }catch(e){/* ignore */}
+	try{ renderTopbar(); }catch(e){/* ignore */}
+}
+
+if (typeof window !== 'undefined') window.initUI = initUI;
+
